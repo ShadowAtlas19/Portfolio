@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => (
   <nav className="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference text-white">
-    <motion.div 
+    <motion.div
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       className="text-2xl font-black tracking-tighter"
@@ -27,11 +27,11 @@ const Navbar = () => (
 
 const Hero = () => (
   <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-zinc-950">
-    <div 
+    <div
       className="absolute inset-0 z-0 bg-cover bg-center opacity-20 scale-110"
       style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80')" }}
     />
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -42,6 +42,7 @@ const Hero = () => (
       </h1>
       <p className="mt-8 text-zinc-500 font-light tracking-[0.6em] uppercase text-sm">
         Learner - Creator - Explorer
+
       </p>
     </motion.div>
   </div>
@@ -60,7 +61,7 @@ const Projects = () => {
         <h2 className="text-[6vw] font-bold uppercase leading-none text-zinc-800">Projects</h2>
       </div>
       {items.map((item, i) => (
-        <motion.div 
+        <motion.div
           key={i}
           whileHover={{ y: -20 }}
           className="relative w-[30vw] h-[60vh] flex-shrink-0 bg-zinc-800 overflow-hidden group border border-zinc-800"
@@ -78,10 +79,48 @@ const Projects = () => {
   );
 };
 
+const Certifications = () => {
+  const certificates = [
+    {
+      title: "Revisiting chemistry: Preparatory course for ACE-AS1201",
+      issuer: "MIT VPU ",
+      year: "2025",
+      img: "src/assets/chemistry.png"
+    },
+    
+
+  ];
+
+  return (
+    <div className="w-full h-full flex items-center px-[10vw] gap-[5vw] bg-zinc-950">
+      <div className="flex-shrink-0 mr-20 max-w-xs">
+        <h2 className="text-[4vw] font-bold uppercase leading-none text-zinc-800">Certifications</h2>
+        {/* <p className="mt-6 text-sm text-zinc-500 tracking-[0.24em] uppercase">Verified credentials that amplify skills across cloud, front-end, and data.</p> */}
+      </div>
+      <div className="flex gap-[4vw] overflow-hidden">
+        {certificates.map((cert, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ y: -15 }}
+            className="relative w-[40vw] h-[60vh] ml-30 flex-shrink-0 overflow-hidden rounded-[2rem] border border-zinc-800 bg-zinc-900 shadow-2xl shadow-black/20 group"
+          >
+            <img src={cert.img} alt={cert.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent p-8 flex flex-col justify-end opacity-100">
+              <p className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-2">{cert.issuer}</p>
+              <h3 className="text-3xl font-bold text-white leading-tight">{cert.title}</h3>
+              <p className="mt-3 text-sm text-zinc-300">Issued {cert.year}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const About = () => (
   <div className="w-full h-full flex items-center justify-center bg-zinc-100 text-zinc-900 px-[10vw]">
     <div className="max-w-5xl">
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         className="text-[4vw] font-medium leading-[1.1] tracking-tight"
@@ -108,7 +147,7 @@ const About = () => (
 const Contact = () => (
   <div className="w-full h-full flex flex-col justify-center px-[10vw] bg-zinc-950 relative">
     <div className="flex flex-col">
-      <motion.a 
+      <motion.a
         href="mailto:shahnawazshaikh0919@gmail.com"
         whileHover={{ x: 30 }}
         className="group flex items-center gap-10 text-[8vw] font-black tracking-tighter transition-all"
@@ -117,7 +156,7 @@ const Contact = () => (
         <ArrowUpRight size="5vw" className="text-zinc-700 group-hover:text-white group-hover:rotate-45 transition-all" />
       </motion.a>
     </div>
-    
+
     <div className="absolute bottom-10 left-[10vw] right-[10vw] flex justify-between items-center py-10 border-t border-zinc-900">
       {/* <div className="flex gap-8">
         <Backpack size={20} className="text-zinc-600 hover:text-white cursor-pointer" />
@@ -135,7 +174,7 @@ export default function App() {
 
   useEffect(() => {
     const sections = gsap.utils.toArray('.panel');
-    
+
     let ctx = gsap.context(() => {
       gsap.to(sections, {
         xPercent: -100 * (sections.length - 1),
@@ -156,14 +195,17 @@ export default function App() {
   return (
     <div className="bg-zinc-950 text-zinc-100 selection:bg-white selection:text-black">
       <Navbar />
-      
+
       {/* Horizontal Scroll Container */}
-      <div ref={containerRef} className="flex w-[400vw] h-screen overflow-hidden">
+      <div ref={containerRef} className="flex w-[500vw] h-screen overflow-hidden">
         <section className="panel w-screen h-screen flex-shrink-0">
           <Hero />
         </section>
         <section className="panel w-screen h-screen flex-shrink-0">
           <Projects />
+        </section>
+        <section className="panel w-screen h-screen flex-shrink-0">
+          <Certifications />
         </section>
         <section className="panel w-screen h-screen flex-shrink-0">
           <About />
@@ -174,7 +216,7 @@ export default function App() {
       </div>
 
       {/* Progress Bar */}
-      <motion.div 
+      <motion.div
         className="fixed bottom-0 left-0 h-[2px] bg-white z-50"
         style={{
           scaleX: 0,
